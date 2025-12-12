@@ -1,7 +1,13 @@
 Family Budget (Private)
 
 Categories:
-- Rent
-- Utilities
-- Groceries
-- Savings goals
+- Rent / Mortgage
+- Utilities (power, water, internet)
+- Groceries and household essentials
+- Transportation (fuel, metro cards, maintenance)
+- Kids activities and daycare
+- Savings goals: emergency fund + vacation fund
+
+Notes:
+- Review subscription services for potential cuts
+- Track monthly spending in spreadsheet tab "2025"

@@ -1,5 +1,9 @@
 Meeting Notes (Work)
 
-- Follow up with finance on budget
-- Prepare slide deck
-- Email client regarding onboarding
+Participants: Product, Finance, Sales Engineering
+
+- Follow up with finance on budget adjustments for cloud spend
+- Prepare slide deck covering roadmap risks
+- Email client regarding onboarding timeline expectations
+- Capture questions about single sign-on support
+- Schedule next sync for Tuesday 10am

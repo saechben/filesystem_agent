@@ -4,10 +4,13 @@ import json
 import shutil
 
 from deepagents import create_deep_agent
+from deepagents.backends import FilesystemBackend
 from langchain.chat_models import init_chat_model
 from omegaconf import OmegaConf
 
 from app.core.config import API_KEY_ENV_VAR, get_config
+from app.services.data import initialize_agent_data
+
 @runtime_checkable
 class AgentInterface(Protocol):
     def organize(self,root:Path,semantics:dict):
@@ -43,8 +46,13 @@ class FileAgent(AgentInterface):
             init_kwargs["organization"] = organization
 
         self.base_model = init_chat_model(**init_kwargs)
+        self.backend = FilesystemBackend(root_dir=self.workspace_root, virtual_mode=True)
         self.tools = [self._create_move_file_tool()]
-        self.agent = create_deep_agent(model=self.base_model, tools=self.tools)
+        self.agent = create_deep_agent(
+            model=self.base_model,
+            tools=self.tools,
+            backend=self.backend,
+        )
 
     def _create_move_file_tool(self):
         root = self.workspace_root
@@ -154,3 +162,17 @@ class FileAgent(AgentInterface):
         except ValueError as exc:
             raise ValueError(f"Path {resolved} is outside the workspace.") from exc
         return resolved
+
+
+def main():
+    root = initialize_agent_data()
+    semantics = {
+        "work": "Documents related to professional projects, planning, clients, or company meetings.",
+        "private": "Personal files such as travel plans, recipes, or family finances.",
+    }
+    agent = FileAgent()
+    agent.organize(root, semantics)
+    
+
+if __name__ == "__main__":
+    main()
