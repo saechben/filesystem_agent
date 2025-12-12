@@ -1,6 +1,6 @@
 api:
   provider: openai
-  model: gpt5-nano
+  model: gpt-4.1-mini
   key: ""
   organization: null
   base_url: https://api.openai.com/v1
