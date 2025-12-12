@@ -1,0 +1,7 @@
+Family Budget (Private)
+
+Categories:
+- Rent
+- Utilities
+- Groceries
+- Savings goals
