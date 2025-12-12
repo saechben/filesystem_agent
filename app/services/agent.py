@@ -46,12 +46,13 @@ class FileAgent(AgentInterface):
             init_kwargs["organization"] = organization
 
         self.base_model = init_chat_model(**init_kwargs)
-        self.backend = FilesystemBackend(root_dir=self.workspace_root, virtual_mode=True)
+        self.backend = FilesystemBackend(root_dir=self.workspace_root, virtual_mode=False)
         self.tools = [self._create_move_file_tool()]
         self.agent = create_deep_agent(
             model=self.base_model,
             tools=self.tools,
             backend=self.backend,
+            interrupt_on={"write_todos": True},
         )
 
     def _create_move_file_tool(self):
@@ -149,7 +150,10 @@ class FileAgent(AgentInterface):
             f"{semantics_blob}"
         )
 
-        result = self.agent.invoke({"messages": [{"role": "user", "content": task_instructions}]})
+        result = self.agent.invoke(
+            {"messages": [{"role": "user", "content": task_instructions}]},
+            config={"sender": "organizer"},
+        )
         print(result)
 
     def _resolve_workspace_path(self, path: Path | str) -> Path:
