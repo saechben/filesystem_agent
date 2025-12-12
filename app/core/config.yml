@@ -1,0 +1,8 @@
+api:
+  provider: openai
+  model: gpt5-nano
+  key: ""
+  organization: null
+  base_url: https://api.openai.com/v1
+  temperature: 0.2
+  max_output_tokens: 2048
